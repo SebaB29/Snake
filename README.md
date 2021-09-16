@@ -13,4 +13,4 @@ Primer Trabajo Práctico que hice en la Facultad, pero le agrego la Programació
 
 
 # Gráficos
-Para la interfaz gráfica utilizo la librería gamelib, extraída de: https://github.com/dessaya/python-gamelib
+La interfaz gráfica se creo utilizando [GAMELIB](https://github.com/dessaya/python-gamelib)
