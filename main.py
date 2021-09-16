@@ -11,7 +11,7 @@ def main(level=0):
     obstacle.set_obstacle(level)
     fruit.set_fruit(game.get_board(), snake.get_snake(), obstacle.get_obstacle())
 
-    while loop(fps = 4) and not game._finish_game(snake, fruit.get_quantity_fruits(), obstacle.get_obstacle()):
+    while loop(fps = 8) and not game._finish_game(snake, fruit.get_quantity_fruits(), obstacle.get_obstacle()):
         for event in get_events():
             if event.type == EventType.KeyPress:
                 event.key = event.key.upper()
