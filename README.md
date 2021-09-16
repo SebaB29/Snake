@@ -5,11 +5,11 @@ Primer Trabajo Práctico que hice en la Facultad, pero le agrego la Programació
 
 # Archivos
 
-*obstacles.txt: contiene los distintos obstaculos que se dibujaran en el tablero en niveles.
-*snake.py: contiene las clases Juego, Serpiente, Fruta y Obstáculo con sus respectivos métodos.
-*gráficos.py: contiene las funciónes gráficas creadas a partir de la librería gamelib para crear la interfaz gráfica.
-*gamelib.py: librería utilizada para la interfaz gráfica.
-*main.py: archivo principal donde se ejecuta el desarrollo del juego.
+* obstacles.txt: contiene los distintos obstaculos que se dibujaran en el tablero en niveles.
+* snake.py: contiene las clases Juego, Serpiente, Fruta y Obstáculo con sus respectivos métodos.
+* gráficos.py: contiene las funciónes gráficas creadas a partir de la librería gamelib para crear la interfaz gráfica.
+* gamelib.py: librería utilizada para la interfaz gráfica.
+* main.py: archivo principal donde se ejecuta el desarrollo del juego.
 
 
 # Gráficos
