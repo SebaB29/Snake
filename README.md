@@ -5,7 +5,7 @@ Primer Trabajo Práctico que hice en la Facultad, pero le agrego la Programació
 
 # Contiene
 
-obstacles.txt, contiene los distintos obstaculos que se dibujaran en el tablero en niveles
+ # obstacles.txt, contiene los distintos obstaculos que se dibujaran en el tablero en niveles
 
 Dentro del archivo snake.py están creadas las clases Juego, Serpiente, Fruta y Obstáculo con sus respectivos métodos.
 En el archivo
