@@ -1,2 +1,6 @@
 # Snake
-Juego Snake (Primer TP que hice en la Facultad, pero más completo)
+Juego Snake
+
+Primer Trabajo Práctico que hice en la Facultad,pero utilizando la Programación Orientada a Objetos y agregando una simple interfaz gráfica.
+
+Para la interfaz gráfica utilizo la librería gamelib, extraída de: https://github.com/dessaya/python-gamelib
