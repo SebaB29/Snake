@@ -13,7 +13,7 @@ class Game:
 
     def __init__(self, board_columns: int, board_rows: int) -> None:
         """
-        Recibe: la cantidad de filas y la cantidad de columnas del tablero
+        Recibe: la cantidad de filas (int) y la cantidad de columnas (int) del tablero
 
         Inicializa la clase Game
         """
@@ -22,7 +22,7 @@ class Game:
 
     def get_board(self) -> list:
         """
-        Devuelve: el tablero (list[lists[str]])
+        Devuelve: el tablero (list[list[str]])
         """
         return self.__board
 
@@ -91,7 +91,7 @@ class Snake:
 
     def get_snake(self) -> list:
         """
-        Devuelve: las coordenadas del snake (list[tuples])
+        Devuelve: las coordenadas del snake (list[tuple])
         """
         return self.__coordinates
 
@@ -141,7 +141,7 @@ class Snake:
 
     def _you_crashed(self, obstacle_coordinates: tuple):
         """
-        Recibe: las coordenadas del obstacul (tuple)
+        Recibe: las coordenadas del obstáculo (tuple)
 
         Devuelve:
                 True: si el snake choco, es decir, si la cabeza choca con el cuerpo o contra un obstáculo
@@ -181,8 +181,8 @@ class Fruit:
 
     def set_fruit(self, board: list, snake_coordinates: list, obstacle_coordinates: list) -> None:
         """
-        Recibe: el tablero (list[lists]), las coordenadas del snake (list[tuples]) y las coordenadas
-        del obstáculo (tuple(tuples))
+        Recibe: el tablero (list[lists]), las coordenadas del snake (list[tuple]) y las coordenadas
+        del obstáculo (tuple(tuple))
 
         Si la fruta ya tiene coordenadas las elimina, establece las nuevas coordenadas de la fruta
         """
@@ -198,8 +198,8 @@ class Fruit:
 
     def __generate_fruit(self, board: list, snake_coordinates: list, obstacle_coordinates: list) -> tuple:
         """
-        Recibe: el tablero (list[lists], las coordenadas del snake (list[tuples]) y las coordenadas del
-        obstáculo (tuple(tuples))
+        Recibe: el tablero (list[list[str]]), las coordenadas del snake (list[tuple]) y las coordenadas del
+        obstáculo (tuple(tuple))
 
         Crea las nuevas coordenadas de la fruta, que estén dentro del rango del tablero y que no aparezca
         sobre el snake o el obstáculo
@@ -248,7 +248,7 @@ class Obstacle:
         """
         Lee el archivo con las coordenadas de los obstáculos
 
-        Devuelve: un diccionario (dict) con las coordenadas de todos los obstáculos
+        Devuelve: las coordenadas de todos los obstáculos (dict)
         """
         obstacles = {}
         with open("obstacles.txt") as file:
