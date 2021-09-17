@@ -119,9 +119,9 @@ def show_end() -> None:
 
 def convert_coordinates_to_pixels(element_coordinates: list) -> list:
     """
-    Recibe: las coordenadas de un elemento (list[tuples])
+    Recibe: las coordenadas de un elemento (list[tuple])
     
-    Devuelve: su posición en pixels (list[tuples])
+    Devuelve: su posición en pixels (list[tuple])
     """
 
     return [
