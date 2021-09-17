@@ -92,7 +92,7 @@ def show_restart_button() -> None:
     draw_rectangle(BUTTON_SIDES["left"], BUTTON_SIDES["up"], BUTTON_SIDES["right"], BUTTON_SIDES["down"], fill="#000", outline="#FFF")
     draw_text("RESTART", button_width / 2, button_height / 2, size=15)
 
-def show_game(level: int, snake: object, fruit: object, obstacle: object) -> None:
+def show_game(level: int, snake_data: list, fruit_data: list, obstacle_data: list) -> None:
     """
     Recibe: el nivel actual (int), snake (object), fruit (object) y obstacle (object)
     
@@ -100,12 +100,12 @@ def show_game(level: int, snake: object, fruit: object, obstacle: object) -> Non
     """
     draw_begin()
     show_level(level)
-    show_condition(fruit.get_quantity_fruits(), fruit.get_colour())
+    show_condition(fruit_data[2], fruit_data[1])
     show_keys()
     draw_board()
-    draw_element(snake.get_snake(), snake.get_colour())
-    draw_element(fruit.get_fruit(), fruit.get_colour())
-    draw_element(obstacle.get_obstacle(), obstacle.get_colour())
+    draw_element(snake_data[0], snake_data[1])
+    draw_element(fruit_data[0], fruit_data[1])
+    draw_element(obstacle_data[0], obstacle_data[1])
     draw_end()
 
 def show_end() -> None:
@@ -119,9 +119,9 @@ def show_end() -> None:
 
 def convert_coordinates_to_pixels(element_coordinates: list) -> list:
     """
-    Recibe: las coordenadas de un elemento (list[tuple])
+    Recibe: las coordenadas de un elemento (list[tuples])
     
-    Devuelve: su posición en pixels (list[tuple])
+    Devuelve: su posición en pixels (list[tuples])
     """
 
     return [

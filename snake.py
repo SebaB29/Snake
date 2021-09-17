@@ -13,7 +13,7 @@ class Game:
 
     def __init__(self, board_columns: int, board_rows: int) -> None:
         """
-        Recibe: la cantidad de filas (int) y la cantidad de columnas (int) del tablero
+        Recibe: la cantidad de filas y la cantidad de columnas del tablero
 
         Inicializa la clase Game
         """
@@ -22,7 +22,7 @@ class Game:
 
     def get_board(self) -> list:
         """
-        Devuelve: el tablero (list[list[str]])
+        Devuelve: el tablero (list[lists[str]])
         """
         return self.__board
 
@@ -78,22 +78,34 @@ class Game:
         return self._you_won(quantity_fruits) or self.__you_lost(snake.get_head(), snake._you_crashed(obstacle_coordinates))
 
 
-class Snake:
+class Object:
+
+    def __init__(self, coordinates: list, colour: str) -> None:
+        self.coordinates = coordinates
+        self.colour = colour
+    
+    def get_coordinates(self) -> list:
+        """
+        Devuelve: las coordenadas del objeto (list)
+        """
+        return self.coordinates
+    
+    def get_colour(self) -> str:
+        """
+        Devuelve: el color del objeto (str)
+        """
+        return self.colour
+
+
+class Snake(Object):
 
     def __init__(self) -> None:
         """
         Inicializa la clase Snake
         """
-        self.__coordinates = [(0,0),(1,0),(2,0)]
-        self.__head = self.__coordinates[-1]
-        self.__tail = self.__coordinates[0]
-        self.__colour = "#1A8500"
-
-    def get_snake(self) -> list:
-        """
-        Devuelve: las coordenadas del snake (list[tuple])
-        """
-        return self.__coordinates
+        Object.__init__(self, [(0,0),(1,0),(2,0)], "#1A8500")
+        self.__head = self.coordinates[-1]
+        self.__tail = self.coordinates[0]
 
     def get_head(self) -> tuple:
         """
@@ -101,23 +113,17 @@ class Snake:
         """
         return self.__head
 
-    def get_colour(self) -> str:
-        """
-        Devuelve: el color del snake (str)
-        """
-        return self.__colour
-
     def __set_head(self) -> None:
         """
         Establece las nuevas coordenadas de la cabeza
         """
-        self.__head = self.__coordinates[-1]
+        self.__head = self.coordinates[-1]
 
     def __set_tail(self) -> None:
         """
         Establece las nuevas coordenadas de la cola del snake
         """
-        self.__tail = self.__coordinates[0]
+        self.__tail = self.coordinates[0]
 
     def move(self, last_move: str) -> tuple:
         """
@@ -125,8 +131,8 @@ class Snake:
 
         Actualiza las coordenadas del snake y ejecuta los métodos __set_head y __set_tail()
         """
-        self.__coordinates.append((self.__head[0] + KEYS[last_move][0] , self.__head[1] + KEYS[last_move][1]))
-        self.__coordinates.pop(0)
+        self.coordinates.append((self.__head[0] + KEYS[last_move][0] , self.__head[1] + KEYS[last_move][1]))
+        self.coordinates.pop(0)
         self.__set_head()
         self.__set_tail()
 
@@ -136,42 +142,29 @@ class Snake:
 
         Agrega las coordenadas de la fruta al snake y ejecuta el método set_quantity_fruits()
         """
-        self.__coordinates.insert(0, self.__tail)
+        self.coordinates.insert(0, self.__tail)
         fruit.set_quantity_fruits()
 
     def _you_crashed(self, obstacle_coordinates: tuple):
         """
-        Recibe: las coordenadas del obstáculo (tuple)
+        Recibe: las coordenadas del obstacul (tuple)
 
         Devuelve:
                 True: si el snake choco, es decir, si la cabeza choca con el cuerpo o contra un obstáculo
 
                 False: en caso contrario
         """
-        return self.__head in self.__coordinates[:-1] or self.__head in obstacle_coordinates
+        return self.__head in self.coordinates[:-1] or self.__head in obstacle_coordinates
 
 
-class Fruit:
+class Fruit(Object):
 
     def __init__(self) -> None:
         """
         Inicializa la clase Fruit
         """
-        self.__coordinates = []
-        self.__colour = "#F00"
+        Object.__init__(self, [], "#F00")
         self.__quantity_fruits = AMOUNT_TO_WIN
-
-    def get_fruit(self) -> list:
-        """
-        Devuelve: las coordenadas de la fruta (list[tuple])
-        """
-        return self.__coordinates
-
-    def get_colour(self) -> str:
-        """
-        Devuelve: el color de la fruta (str)
-        """
-        return self.__colour
 
     def get_quantity_fruits(self) -> int:
         """
@@ -181,14 +174,14 @@ class Fruit:
 
     def set_fruit(self, board: list, snake_coordinates: list, obstacle_coordinates: list) -> None:
         """
-        Recibe: el tablero (list[lists]), las coordenadas del snake (list[tuple]) y las coordenadas
-        del obstáculo (tuple(tuple))
+        Recibe: el tablero (list[lists]), las coordenadas del snake (list[tuples]) y las coordenadas
+        del obstáculo (tuple(tuples))
 
         Si la fruta ya tiene coordenadas las elimina, establece las nuevas coordenadas de la fruta
         """
-        if self.__coordinates:
-            self.__coordinates.pop()
-        self.__coordinates.append(self.__generate_fruit(board, snake_coordinates, obstacle_coordinates))
+        if self.coordinates:
+            self.coordinates.pop()
+        self.coordinates.append(self.__generate_fruit(board, snake_coordinates, obstacle_coordinates))
 
     def set_quantity_fruits(self) -> None:
         """
@@ -198,8 +191,8 @@ class Fruit:
 
     def __generate_fruit(self, board: list, snake_coordinates: list, obstacle_coordinates: list) -> tuple:
         """
-        Recibe: el tablero (list[list[str]]), las coordenadas del snake (list[tuple]) y las coordenadas del
-        obstáculo (tuple(tuple))
+        Recibe: el tablero (list[lists], las coordenadas del snake (list[tuples]) y las coordenadas del
+        obstáculo (tuple(tuples))
 
         Crea las nuevas coordenadas de la fruta, que estén dentro del rango del tablero y que no aparezca
         sobre el snake o el obstáculo
@@ -213,27 +206,14 @@ class Fruit:
         return new_coordinates
 
 
-class Obstacle:
+class Obstacle(Object):
 
     def __init__(self) -> None:
         """
         Inicializa la clase Obstacle
         """
+        Object.__init__(self, None, "#CEB200")
         self.__obstacles = self.__read_obstacle_file()
-        self.__coordinates = None
-        self.__colour = "#CEB200"
-
-    def get_obstacle(self) -> tuple:
-        """
-        Devuelve: las coordenadas del obstáculo (tuple) 
-        """
-        return self.__coordinates
-
-    def get_colour(self) -> str:
-        """
-        Devuelve: el color del obstáculo (str)
-        """
-        return self.__colour
 
     def set_obstacle(self, level: int) -> None:
         """
@@ -242,16 +222,16 @@ class Obstacle:
         Establece las coordenadas del obstáculo que corresponde
         """
         obstacle_index = level % len(self.__obstacles)
-        self.__coordinates = self.__obstacles[obstacle_index]
+        self.coordinates = self.__obstacles[obstacle_index]
 
     def __read_obstacle_file(self) -> dict:
         """
         Lee el archivo con las coordenadas de los obstáculos
 
-        Devuelve: las coordenadas de todos los obstáculos (dict)
+        Devuelve: un diccionario (dict) con las coordenadas de todos los obstáculos
         """
         obstacles = {}
-        with open("obstacles.txt") as file:
+        with open("Snake/obstacles.txt") as file:
             csv_reader = reader(file, delimiter=" ")
             for i, coordinate_group in enumerate(csv_reader):
                 for coordinates in coordinate_group[:-2]:

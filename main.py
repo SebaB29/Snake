@@ -9,9 +9,9 @@ def main(level=0):
 
     game, snake, fruit, obstacle = Game(BOARD_ROWS, BOARD_COLUMNS), Snake(), Fruit(), Obstacle()
     obstacle.set_obstacle(level)
-    fruit.set_fruit(game.get_board(), snake.get_snake(), obstacle.get_obstacle())
+    fruit.set_fruit(game.get_board(), snake.get_coordinates(), obstacle.get_coordinates())
 
-    while loop(fps = 8) and not game._finish_game(snake, fruit.get_quantity_fruits(), obstacle.get_obstacle()):
+    while loop(fps = 8) and not game._finish_game(snake, fruit.get_quantity_fruits(), obstacle.get_coordinates()):
         for event in get_events():
             if event.type == EventType.KeyPress:
                 event.key = event.key.upper()
@@ -20,11 +20,16 @@ def main(level=0):
                     wait(EventType.KeyPress)
 
         snake.move(game.get_last_move())
-        if snake.get_head() in fruit.get_fruit():
+        if snake.get_head() in fruit.get_coordinates():
             snake.eat_fruit(fruit)
-            fruit.set_fruit(game.get_board(), snake.get_snake(), obstacle.get_obstacle())
+            fruit.set_fruit(game.get_board(), snake.get_coordinates(), obstacle.get_coordinates())
 
-        show_game(level, snake, fruit, obstacle)
+        show_game(
+                level,
+                [snake.get_coordinates(), snake.get_colour()],
+                [fruit.get_coordinates(), fruit.get_colour(), fruit.get_quantity_fruits()],
+                [obstacle.get_coordinates(), obstacle.get_colour()]
+                )
 
     if game._you_won(fruit.get_quantity_fruits()):
         main(level = level + 1)
