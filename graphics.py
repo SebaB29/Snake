@@ -19,9 +19,9 @@ LOCKERS_DIMENSIONS = {
                       }
 BOARD_SIDES = {
                 "left": MARGINS["horizontal"],
-                "right": MARGINS["horizontal"] + LOCKERS_DIMENSIONS["width"] * BOARD_COLUMNS,
+                "right": WINDOW_DIMENSIONS["width"] - MARGINS["horizontal"],
                 "up": MARGINS["vertical"],
-                "down": MARGINS["vertical"] + LOCKERS_DIMENSIONS["height"] * BOARD_ROWS
+                "down": WINDOW_DIMENSIONS["height"] - MARGINS["vertical"]
                }
 BUTTON_SIDES = {
                 "left": WINDOW_DIMENSIONS["width"] * 1/4,
