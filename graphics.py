@@ -1,4 +1,5 @@
 from gamelib import draw_begin, draw_end, draw_text, draw_rectangle, draw_oval
+from snake import BOARD_ROWS, BOARD_COLUMNS
 
 WINDOW_DIMENSIONS = {
                       "height": 500,
@@ -8,7 +9,6 @@ MARGINS = {
             "horizontal": 40,
             "vertical": 60
            }
-BOARD_ROWS, BOARD_COLUMNS = (21, 21)
 BOARD_DIMENSIONS = {
                       "width": WINDOW_DIMENSIONS["width"] - MARGINS["horizontal"] * 2,
                       "height": WINDOW_DIMENSIONS["height"] - MARGINS["vertical"] * 2

@@ -1,6 +1,7 @@
 from random import randint
 from csv import reader
 
+BOARD_ROWS, BOARD_COLUMNS = (21, 21)
 AMOUNT_TO_WIN = 20
 KEYS = {
 	"UP": (0,-1),
@@ -11,20 +12,19 @@ KEYS = {
 
 class Game:
 
-    def __init__(self, board_columns: int, board_rows: int) -> None:
+    def __init__(self) -> None:
         """
-        Recibe: la cantidad de filas y la cantidad de columnas del tablero
-
         Inicializa la clase Game
         """
-        self.__board = [["" for _ in range(1, board_columns)] for _ in range(1, board_rows)]
+        self.__rows = BOARD_ROWS
+        self.__columns = BOARD_COLUMNS
         self.__last_move = "RIGHT"
 
-    def get_board(self) -> list:
+    def get_board_dimensions(self) -> list:
         """
-        Devuelve: el tablero (list[lists[str]])
+        Devuelve: las dimensiones del tablero (tuple)
         """
-        return self.__board
+        return (self.__rows, self.__columns)
 
     def get_last_move(self) -> str:
         """
@@ -50,7 +50,7 @@ class Game:
 
             False: en caso contrario
         """
-        return not (0 <= snake_head[0] <= len(self.__board) and 0 <= snake_head[1] <= len(self.__board[0])) or you_crashed
+        return not (0 <= snake_head[0] < self.__rows and 0 <= snake_head[1] < self.__columns) or you_crashed
 
     def _you_won(self, quantity_fruits: int) -> bool:
         """
@@ -66,7 +66,7 @@ class Game:
     def _finish_game(self, snake: object, quantity_fruits: int, obstacle_coordinates: list) -> bool:
         """
         Recibe: el snake (object), la cantidad de frutas que hay que comer para ganar (int) 
-                y las coordenadas del obstaculo (tuple(tuples))
+                y las coordenadas del obstaculo (tuple(tuple))
         
         Ejecuta los métodos _you_won y you_lost
         
@@ -172,16 +172,16 @@ class Fruit(Object):
         """
         return self.__quantity_fruits
 
-    def set_fruit(self, board: list, snake_coordinates: list, obstacle_coordinates: list) -> None:
+    def set_fruit(self, board_dimensions: tuple, snake_coordinates: list, obstacle_coordinates: list) -> None:
         """
-        Recibe: el tablero (list[lists]), las coordenadas del snake (list[tuples]) y las coordenadas
-        del obstáculo (tuple(tuples))
+        Recibe: las dimensiones del tablero (tuple), las coordenadas del snake (list[tuple]) y las coordenadas
+        del obstáculo (tuple(tuple))
 
         Si la fruta ya tiene coordenadas las elimina, establece las nuevas coordenadas de la fruta
         """
         if self.coordinates:
             self.coordinates.pop()
-        self.coordinates.append(self.__generate_fruit(board, snake_coordinates, obstacle_coordinates))
+        self.coordinates.append(self.__generate_fruit(board_dimensions, snake_coordinates, obstacle_coordinates))
 
     def set_quantity_fruits(self) -> None:
         """
@@ -189,10 +189,10 @@ class Fruit(Object):
         """
         self.__quantity_fruits -= 1
 
-    def __generate_fruit(self, board: list, snake_coordinates: list, obstacle_coordinates: list) -> tuple:
+    def __generate_fruit(self, board_dimensions: tuple, snake_coordinates: list, obstacle_coordinates: list) -> tuple:
         """
-        Recibe: el tablero (list[lists], las coordenadas del snake (list[tuples]) y las coordenadas del
-        obstáculo (tuple(tuples))
+        Recibe: las dimensiones del tablero (tuple), las coordenadas del snake (list[tuple]) y las coordenadas del
+        obstáculo (tuple(tuple))
 
         Crea las nuevas coordenadas de la fruta, que estén dentro del rango del tablero y que no aparezca
         sobre el snake o el obstáculo
@@ -201,7 +201,7 @@ class Fruit(Object):
         """
         new_coordinates = None
         while not new_coordinates or new_coordinates in snake_coordinates or new_coordinates in obstacle_coordinates:
-            new_coordinates = (randint(0, len(board[0]) - 1), randint(0, len(board) - 1))
+            new_coordinates = (randint(0, board_dimensions[1] - 1), randint(0, board_dimensions[0] - 1))
 
         return new_coordinates
 
@@ -221,7 +221,7 @@ class Obstacle(Object):
 
         Establece las coordenadas del obstáculo que corresponde
         """
-        obstacle_index = level % len(self.__obstacles)
+        obstacle_index = (level - 1) % len(self.__obstacles)
         self.coordinates = self.__obstacles[obstacle_index]
 
     def __read_obstacle_file(self) -> dict:

@@ -1,15 +1,15 @@
-from graphics import WINDOW_DIMENSIONS, BUTTON_SIDES, BOARD_ROWS, BOARD_COLUMNS, show_game, show_end
+from graphics import WINDOW_DIMENSIONS, BUTTON_SIDES, show_game, show_end
 from gamelib import resize, title, init, loop, wait, get_events, EventType
 from snake import Game, Snake, Fruit, Obstacle
 
-def main(level=0):
+def main(level=7):
 
     resize(WINDOW_DIMENSIONS["width"], WINDOW_DIMENSIONS["height"])
     title("SNAKE")
 
-    game, snake, fruit, obstacle = Game(BOARD_ROWS, BOARD_COLUMNS), Snake(), Fruit(), Obstacle()
+    game, snake, fruit, obstacle = Game(), Snake(), Fruit(), Obstacle()
     obstacle.set_obstacle(level)
-    fruit.set_fruit(game.get_board(), snake.get_coordinates(), obstacle.get_coordinates())
+    fruit.set_fruit(game.get_board_dimensions(), snake.get_coordinates(), obstacle.get_coordinates())
 
     while loop(fps = 8) and not game._finish_game(snake, fruit.get_quantity_fruits(), obstacle.get_coordinates()):
         for event in get_events():
@@ -22,7 +22,7 @@ def main(level=0):
         snake.move(game.get_last_move())
         if snake.get_head() in fruit.get_coordinates():
             snake.eat_fruit(fruit)
-            fruit.set_fruit(game.get_board(), snake.get_coordinates(), obstacle.get_coordinates())
+            fruit.set_fruit(game.get_board_dimensions(), snake.get_coordinates(), obstacle.get_coordinates())
 
         show_game(
                 level,
