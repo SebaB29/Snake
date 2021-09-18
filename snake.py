@@ -231,7 +231,7 @@ class Obstacle(Object):
         Devuelve: un diccionario (dict) con las coordenadas de todos los obstáculos
         """
         obstacles = {}
-        with open("Snake/obstacles.txt") as file:
+        with open("obstacles.txt") as file:
             csv_reader = reader(file, delimiter=" ")
             for i, coordinate_group in enumerate(csv_reader):
                 for coordinates in coordinate_group[:-2]:
