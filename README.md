@@ -12,3 +12,5 @@ Primer Trabajo Práctico que hice en la Facultad, pero le agrego la Programació
 
 # Gráficos
 La interfaz gráfica se creo utilizando la librería extraída [Gamelib](https://github.com/dessaya/python-gamelib)
+
+![Snake](https://github.com/SebaB29/Snake/blob/main/img/snakephoto.png)
