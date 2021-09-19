@@ -2,7 +2,7 @@ from graphics import WINDOW_DIMENSIONS, BUTTON_SIDES, show_game, show_end
 from gamelib import resize, title, init, loop, wait, get_events, EventType
 from snake import Game, Snake, Fruit, Obstacle
 
-def main(level=7):
+def main(level=1):
 
     resize(WINDOW_DIMENSIONS["width"], WINDOW_DIMENSIONS["height"])
     title("SNAKE")
