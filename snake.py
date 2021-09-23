@@ -18,7 +18,7 @@ class Game:
         """
         self.__last_move = "RIGHT"
 
-    def get_board_dimensions(self) -> list:
+    def get_board_dimensions(self) -> tuple:
         """
         Devuelve: las dimensiones del tablero (tuple)
         """
