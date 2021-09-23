@@ -16,15 +16,13 @@ class Game:
         """
         Inicializa la clase Game
         """
-        self.__rows = BOARD_ROWS
-        self.__columns = BOARD_COLUMNS
         self.__last_move = "RIGHT"
 
     def get_board_dimensions(self) -> list:
         """
         Devuelve: las dimensiones del tablero (tuple)
         """
-        return (self.__rows, self.__columns)
+        return (BOARD_ROWS, BOARD_COLUMNS)
 
     def get_last_move(self) -> str:
         """
@@ -50,7 +48,7 @@ class Game:
 
             False: en caso contrario
         """
-        return not (0 <= snake_head[0] < self.__rows and 0 <= snake_head[1] < self.__columns) or you_crashed
+        return not (0 <= snake_head[0] < BOARD_ROWS and 0 <= snake_head[1] < BOARD_COLUMNS) or you_crashed
 
     def _you_won(self, quantity_fruits: int) -> bool:
         """
@@ -231,7 +229,7 @@ class Obstacle(Object):
         Devuelve: un diccionario (dict) con las coordenadas de todos los obstáculos
         """
         obstacles = {}
-        with open("obstacles.txt") as file:
+        with open("Snake/obstacles.txt") as file:
             csv_reader = reader(file, delimiter=" ")
             for i, coordinate_group in enumerate(csv_reader):
                 for coordinates in coordinate_group[:-2]:
