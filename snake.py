@@ -75,6 +75,7 @@ class Game:
         """
         return self._you_won(quantity_fruits) or self.__you_lost(snake.get_head(), snake._you_crashed(obstacle_coordinates))
 
+
 class Snake():
 
     def __init__(self) -> None:
