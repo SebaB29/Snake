@@ -222,13 +222,13 @@ class Obstacle():
 
     def get_coordinates(self) -> list:
         """
-        Devuelve: las coordenadas del objeto (list)
+        Devuelve: las coordenadas del obstáculo (list)
         """
         return self.__coordinates
     
     def get_colour(self) -> str:
         """
-        Devuelve: el color del objeto (str)
+        Devuelve: el color del obstáculo (str)
         """
         return self.__colour
 
