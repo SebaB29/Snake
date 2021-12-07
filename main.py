@@ -1,6 +1,9 @@
-from graphics import WINDOW_DIMENSIONS, BUTTON_SIDES, show_game, show_end
-from gamelib import resize, title, init, loop, wait, get_events, EventType
-from snake import Game, Snake, Fruit, Obstacle
+from graphics.graphics import WINDOW_DIMENSIONS, BUTTON_SIDES, show_game, show_end
+from graphics.gamelib import resize, title, init, loop, wait, get_events, EventType
+from src.game import Game
+from src.snake import Snake
+from src.fruit import Fruit
+from src.obstacle import Obstacle
 
 def main(level=1):
 
