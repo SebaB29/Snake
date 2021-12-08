@@ -52,14 +52,13 @@ class Snake:
         self.__set_head()
         self.__set_tail()
 
-    def eat_fruit(self, fruit: object) -> None:
+    def eat_fruit(self) -> None:
         """
         Recibe: fruit (object)
 
         Agrega las coordenadas de la fruta al snake y ejecuta el método set_quantity_fruits()
         """
         self.__coordinates.insert(0, self.__tail)
-        fruit.set_quantity_fruits()
 
     def _you_crashed(self, obstacle_coordinates: tuple):
         """

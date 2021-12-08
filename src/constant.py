@@ -1,22 +1,21 @@
+from tkinter.constants import HORIZONTAL
+
+
 OBSTACLE_FILE = "resources/obstacles.txt"
 
-BOARD_ROWS, BOARD_COLUMNS = (21, 21)
+BOARD_ROWS = 21
+BOARD_COLUMNS = 21
 
 AMOUNT_FRUITS_TO_WIN = 20
 
-WINDOW_DIMENSIONS = {
-                      "height": 500,
-                      "width": 500
-}
-
-MARGINS = {
-            "horizontal": 40,
-            "vertical": 60
-}
+WINDOW_HEIGHT = 500
+WINDOW_WIDTH = 500
+HORIZONTAL_MARGIN = 40
+VERTICAL_MARGIN = 60
 
 BOARD_DIMENSIONS = {
-                      "width": WINDOW_DIMENSIONS["width"] - MARGINS["horizontal"] * 2,
-                      "height": WINDOW_DIMENSIONS["height"] - MARGINS["vertical"] * 2
+                      "width": WINDOW_WIDTH - HORIZONTAL_MARGIN * 2,
+                      "height": WINDOW_HEIGHT - VERTICAL_MARGIN * 2
 }
 
 LOCKERS_DIMENSIONS = {
@@ -25,18 +24,20 @@ LOCKERS_DIMENSIONS = {
 }
 
 BOARD_SIDES = {
-                "left": MARGINS["horizontal"],
-                "right": WINDOW_DIMENSIONS["width"] - MARGINS["horizontal"],
-                "up": MARGINS["vertical"],
-                "down": WINDOW_DIMENSIONS["height"] - MARGINS["vertical"]
+                "left": HORIZONTAL_MARGIN,
+                "right": WINDOW_WIDTH - HORIZONTAL_MARGIN,
+                "up": VERTICAL_MARGIN,
+                "down": WINDOW_HEIGHT - VERTICAL_MARGIN
 }
 
 BUTTON_SIDES = {
-                "left": WINDOW_DIMENSIONS["width"] * 1/4,
-                "right": WINDOW_DIMENSIONS["width"] * 3/4,
+                "left": WINDOW_WIDTH * 1/4,
+                "right": WINDOW_WIDTH * 3/4,
                 "up": 400,
                 "down": 450
 }
+
+PAUSE = "P"
 
 KEYS = {
 	"UP": (0,-1),

@@ -7,7 +7,7 @@ def show_level(level: int) -> None:
     
     Lo muestra en la pantalla
     """
-    draw_text(f"Level {level}", MARGINS["horizontal"] + 25, MARGINS["vertical"] - 15)
+    draw_text(f"Level {level}", HORIZONTAL_MARGIN + 25, VERTICAL_MARGIN - 15)
 
 def show_condition(quantity_fruits: int, fruit_colour: str) -> None:
     """
@@ -15,21 +15,21 @@ def show_condition(quantity_fruits: int, fruit_colour: str) -> None:
     
     Muestra un contador para saber cuantas frutas faltan comer para ganar el nivel
     """
-    draw_text(f"Fruits: {quantity_fruits}", WINDOW_DIMENSIONS["width"] - MARGINS["horizontal"] * 2.6, MARGINS["vertical"] - 15)
+    draw_text(f"Fruits: {quantity_fruits}", WINDOW_WIDTH - HORIZONTAL_MARGIN * 2.6, VERTICAL_MARGIN - 15)
 
-    upper_curve, lower_curve = MARGINS["vertical"] - 24, MARGINS["vertical"] - 9
-    left_curve, right_curve = (WINDOW_DIMENSIONS["width"] - 62), (WINDOW_DIMENSIONS["width"] - 47)
+    upper_curve, lower_curve = VERTICAL_MARGIN - 24, VERTICAL_MARGIN - 9
+    left_curve, right_curve = (WINDOW_WIDTH - 62), (WINDOW_WIDTH - 47)
     draw_oval(left_curve, upper_curve, right_curve, lower_curve, fill=fruit_colour)
 
 def show_keys() -> None:
     """
     Muestra en la pantalla las teclas disponibles
     """
-    draw_text(f"⇧", WINDOW_DIMENSIONS["width"] / 2 + MARGINS["horizontal"] * 2, WINDOW_DIMENSIONS["height"] - 38, size=15)
-    draw_text(f"⇨", WINDOW_DIMENSIONS["width"] / 2 + MARGINS["horizontal"] * 2 + 10, WINDOW_DIMENSIONS["height"] - 30, size=15)
-    draw_text(f"⇩", WINDOW_DIMENSIONS["width"] / 2 + MARGINS["horizontal"] * 2, WINDOW_DIMENSIONS["height"] - 20, size=15)
-    draw_text(f"⇦", WINDOW_DIMENSIONS["width"] / 2 + MARGINS["horizontal"] * 2 - 10, WINDOW_DIMENSIONS["height"] - 30, size=15)
-    draw_text(f"P: Pause", WINDOW_DIMENSIONS["width"] / 2 - MARGINS["horizontal"] * 2, WINDOW_DIMENSIONS["height"] - 30, size=15)
+    draw_text(f"⇧", WINDOW_WIDTH / 2 + HORIZONTAL_MARGIN * 2, WINDOW_HEIGHT - 38, size=15)
+    draw_text(f"⇨", WINDOW_WIDTH / 2 + HORIZONTAL_MARGIN * 2 + 10, WINDOW_HEIGHT - 30, size=15)
+    draw_text(f"⇩", WINDOW_WIDTH / 2 + HORIZONTAL_MARGIN * 2, WINDOW_HEIGHT - 20, size=15)
+    draw_text(f"⇦", WINDOW_WIDTH / 2 + HORIZONTAL_MARGIN * 2 - 10, WINDOW_HEIGHT - 30, size=15)
+    draw_text(f"P: Pause", WINDOW_WIDTH / 2 - HORIZONTAL_MARGIN * 2, WINDOW_HEIGHT - 30, size=15)
 
 def draw_board() -> None:
     """
@@ -52,8 +52,8 @@ def show_game_over() -> None:
     """
     Muestra en la pantalla el mensaje GAME OVER
     """
-    draw_text("GAME", WINDOW_DIMENSIONS["width"] / 2 - 5, WINDOW_DIMENSIONS["height"] / 2 - 80, size=70, fill="#E3E4E5")
-    draw_text("OVER", WINDOW_DIMENSIONS["width"] / 2, WINDOW_DIMENSIONS["height"] / 2, size=70, fill="#E3E4E5")
+    draw_text("GAME", WINDOW_WIDTH / 2 - 5, WINDOW_HEIGHT / 2 - 80, size=70, fill="#E3E4E5")
+    draw_text("OVER", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, size=70, fill="#E3E4E5")
 
 def show_restart_button() -> None:
     """
@@ -96,6 +96,6 @@ def convert_coordinates_to_pixels(element_coordinates: list) -> list:
     """
 
     return [
-        (MARGINS["horizontal"] + LOCKERS_DIMENSIONS["width"] * x_coordinate, MARGINS["vertical"] + LOCKERS_DIMENSIONS["height"] * y_coordinate)
+        (HORIZONTAL_MARGIN + LOCKERS_DIMENSIONS["width"] * x_coordinate, VERTICAL_MARGIN + LOCKERS_DIMENSIONS["height"] * y_coordinate)
         for x_coordinate, y_coordinate in element_coordinates
         ]
