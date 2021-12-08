@@ -20,6 +20,8 @@ RESOURCES:
 GRAPHICS:
   * gamelib.py: librería utilizada para crear la interfaz gráfica y algunos procesos del juego.
   * gráficos.py: contiene las funciones gráficas creadas a partir de la librería gamelib para crear la interfaz gráfica.
+ 
+ IMG: imágenes de muestra del juego.
 
 # Gráficos
 La interfaz gráfica se creo utilizando la librería extraída [Gamelib](https://github.com/dessaya/python-gamelib)
