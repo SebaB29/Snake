@@ -22,7 +22,7 @@ GRAPHICS:
   * gráficos.py: contiene las funciones gráficas creadas a partir de la librería gamelib para crear la interfaz gráfica.
  
  IMG:
-    imágenes de muestra del juego.
+  * imágenes de muestra del juego.
 
 # Gráficos
 La interfaz gráfica se creo utilizando la librería extraída [Gamelib](https://github.com/dessaya/python-gamelib)
