@@ -19,7 +19,7 @@ RESOURCES:
 
 GRAPHICS:
   * gamelib.py: librería utilizada para crear la interfaz gráfica y algunos procesos del juego.
-  * gráficos.py: contiene las funciones gráficas creadas a partir de la librería gamelib para crear la interfaz gráfica.
+  * graphics.py: contiene las funciones gráficas creadas a partir de la librería gamelib para crear la interfaz gráfica.
  
  IMG:
   * imágenes de muestra del juego.
