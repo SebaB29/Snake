@@ -27,5 +27,5 @@ GRAPHICS:
 # Gráficos
 La interfaz gráfica se creo utilizando la librería extraída [Gamelib](https://github.com/dessaya/python-gamelib)
 
-![Snake](https://github.com/SebaB29/Snake/blob/main/img/snake.png)
-![Game Over](https://github.com/SebaB29/Snake/blob/main/img/gameover.png)
+![Snake](img/snake.png)
+![Game Over](img/gameover.png)
