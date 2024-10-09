@@ -82,7 +82,7 @@ Snake/
 │   └── program.py
 ├── main.py
 ├── LICENSE
-└── .gitignore
+└── README.md
 ```
 
 - **graphics/**: Contains libraries for rendering the game (gamelib and custom graphics).
