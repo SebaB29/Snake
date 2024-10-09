@@ -45,10 +45,11 @@ To run this project locally, follow these steps:
 
 Use the following controls to play the game:
 
-- **A**: Move left
-- **D**: Move right
-- **W**: Move up
-- **S**: Move down
+- **Left Arrow**: Move left
+- **Right Arrow**: Move right
+- **Up Arrow**: Move up
+- **Down Arrow**: Move down
+- **P**: Pause
 
 Avoid obstacles and eat fruits to grow longer!
 
