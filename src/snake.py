@@ -1,72 +1,61 @@
 from src.constant import KEYS
 
 class Snake:
-
     def __init__(self) -> None:
         """
-        Inicializa la clase Snake
+        Inicializa la clase Snake con una lista de coordenadas que representa su cuerpo.
         """
-        self.__coordinates = [(0,0),(1,0),(2,0)]
-        self.__colour = "#1A8500"
-        self.__head = self.__coordinates[-1]
-        self.__tail = self.__coordinates[0]
+        self.__coordinates = [(0, 0), (1, 0), (2, 0)]  # Coordenadas del cuerpo
+        self.__colour = "#1A8500"  # Color de la serpiente
 
-    def get_coordinates(self) -> list:
+    @property
+    def coordinates(self) -> list:
         """
-        Devuelve: las coordenadas del snake (list)
+        Devuelve las coordenadas completas de la serpiente.
         """
         return self.__coordinates
-    
-    def get_colour(self) -> str:
+
+    @property
+    def head(self) -> tuple:
         """
-        Devuelve: el color del snake (str)
+        Devuelve las coordenadas de la cabeza de la serpiente.
+        """
+        return self.__coordinates[-1]
+
+    @property
+    def tail(self) -> tuple:
+        """
+        Devuelve las coordenadas de la cola de la serpiente.
+        """
+        return self.__coordinates[0]
+
+    @property
+    def colour(self) -> str:
+        """
+        Devuelve el color de la serpiente.
         """
         return self.__colour
 
-    def get_head(self) -> tuple:
+    def move(self, last_move: str) -> None:
         """
-        Devuelve: las coordenadas de la cabeza del snake (tuple)
+        Recibe el último movimiento realizado y mueve la serpiente en consecuencia.
+        Actualiza la posición de la cabeza y la cola.
         """
-        return self.__head
-
-    def __set_head(self) -> None:
-        """
-        Establece las nuevas coordenadas de la cabeza
-        """
-        self.__head = self.__coordinates[-1]
-
-    def __set_tail(self) -> None:
-        """
-        Establece las nuevas coordenadas de la cola del snake
-        """
-        self.__tail = self.__coordinates[0]
-
-    def move(self, last_move: str) -> tuple:
-        """
-        Recibe: el último movimiento realizado (str)
-
-        Actualiza las coordenadas del snake y ejecuta los métodos __set_head y __set_tail()
-        """
-        self.__coordinates.append((self.__head[0] + KEYS[last_move][0] , self.__head[1] + KEYS[last_move][1]))
-        self.__coordinates.pop(0)
-        self.__set_head()
-        self.__set_tail()
+        # Calcula la nueva cabeza con base en el movimiento
+        new_head = (self.head[0] + KEYS[last_move][0], self.head[1] + KEYS[last_move][1])
+        # El movimiento es siempre agregar una nueva cabeza y mover el cuerpo
+        self.__coordinates.append(new_head)
+        self.__coordinates.pop(0)  # La cola se elimina al final
 
     def eat_fruit(self) -> None:
         """
-        Recibe: fruit (object)
-
-        Agrega las coordenadas de la fruta al snake y ejecuta el método set_quantity_fruits()
+        Al comer una fruta, la serpiente crece añadiendo la cola al principio de las coordenadas.
         """
-        self.__coordinates.insert(0, self.__tail)
+        self.__coordinates.insert(0, self.tail)
 
-    def _you_crashed(self, obstacle_coordinates: tuple):
+    def _you_crashed(self, obstacle_coordinates: tuple) -> bool:
         """
-        Recibe: las coordenadas del obstacul (tuple)
-
-        Devuelve:
-                True: si el snake choco, es decir, si la cabeza choca con el cuerpo o contra un obstáculo
-
-                False: en caso contrario
+        Verifica si la serpiente ha chocado con su propio cuerpo o con un obstáculo.
         """
-        return self.__head in self.__coordinates[:-1] or self.__head in obstacle_coordinates
+        # Choca si la cabeza está en el cuerpo o en las coordenadas de los obstáculos
+        return self.head in self.__coordinates[:-1] or self.head in obstacle_coordinates

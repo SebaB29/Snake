@@ -63,4 +63,4 @@ class Game:
                 
                 False: en caso contrario
         """
-        return self._you_won(quantity_fruits) or self.__you_lost(snake.get_head(), snake._you_crashed(obstacle_coordinates))
+        return self._you_won(quantity_fruits) or self.__you_lost(snake.head, snake._you_crashed(obstacle_coordinates))
