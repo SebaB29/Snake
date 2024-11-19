@@ -1,0 +1,58 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Distribución de paquetes
+build/
+dist/
+*.egg-info/
+
+# Entornos virtuales
+.venv/
+venv/
+ENV/
+env/
+*.env
+
+# Archivos de configuración de IDE
+.vscode/
+.idea/
+
+# Archivos de configuración de editor
+*.swp
+*.swo
+*.swn
+*~
+
+# Archivos de configuración de PyCharm
+*.iml
+
+# Archivos de configuración de Jupyter
+.ipynb_checkpoints/
+
+# Dependencias y entornos
+Pipfile.lock
+*.pyd
+
+# Archivos de logs
+*.log
+
+# Caché de tests
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Archivos de test de cobertura
+.coverage
+*.hypothesis/
+
+# Otros archivos temporales
+*.bak
+*.tmp
+
+# Configuraciones de Windows
+Thumbs.db
+Desktop.ini
