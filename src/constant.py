@@ -1,6 +1,3 @@
-from tkinter.constants import HORIZONTAL
-
-
 OBSTACLE_FILE = "resources/obstacles.txt"
 
 BOARD_ROWS = 21

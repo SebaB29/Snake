@@ -1,10 +1,11 @@
 from graphics.graphics import WINDOW_HEIGHT, WINDOW_WIDTH, BUTTON_SIDES, PAUSE, show_game, show_end
 from graphics.gamelib import resize, title, loop, wait, get_events, EventType
-from src.constant import PAUSE
+from src.constant import PAUSE, OBSTACLE_FILE
 from src.game import Game
 from src.snake import Snake
 from src.fruit import Fruit
 from src.obstacle import Obstacle
+from src.obstacle_loader import ObstacleLoader
 
 class Program:
 
@@ -13,7 +14,8 @@ class Program:
         self.game = Game()
         self.snake = Snake()
         self.fruit = Fruit()
-        self.obstacle = Obstacle()
+        self.loader = ObstacleLoader(OBSTACLE_FILE)
+        self.obstacle = Obstacle(self.loader)
 
     def get_level(self):
         return self.level
