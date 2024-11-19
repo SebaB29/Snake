@@ -1,63 +1,59 @@
 from src.constant import AMOUNT_FRUITS_TO_WIN
 from random import randint
-
 class Fruit:
-
     def __init__(self) -> None:
         """
-        Inicializa la clase Fruit
+        Inicializa la clase Fruit con una lista de coordenadas vacía y la cantidad de frutas necesarias para ganar.
         """
-        self.__coordinates = []
-        self.__colour = "#F00"
-        self.__quantity_fruits = AMOUNT_FRUITS_TO_WIN
+        self._coordinates = []
+        self._colour = "#F00"
+        self._quantity_fruits = AMOUNT_FRUITS_TO_WIN
 
-    def get_coordinates(self) -> list:
+    @property
+    def coordinates(self) -> list:
         """
-        Devuelve: las coordenadas de la fruta (list)
+        Devuelve las coordenadas de la fruta.
         """
-        return self.__coordinates
-    
-    def get_colour(self) -> str:
-        """
-        Devuelve: el color del objeto (str)
-        """
-        return self.__colour
+        return self._coordinates
 
-    def get_quantity_fruits(self) -> int:
+    @property
+    def colour(self) -> str:
         """
-        Devuelve: la cantidad de frutas (int)
+        Devuelve el color de la fruta.
         """
-        return self.__quantity_fruits
+        return self._colour
+
+    @property
+    def quantity_fruits(self) -> int:
+        """
+        Devuelve la cantidad de frutas restantes para ganar.
+        """
+        return self._quantity_fruits
 
     def set_fruit(self, board_dimensions: tuple, snake_coordinates: list, obstacle_coordinates: list) -> None:
         """
         Recibe: las dimensiones del tablero (tuple), las coordenadas del snake (list[tuple]) y las coordenadas
         del obstáculo (tuple(tuple))
 
-        Si la fruta ya tiene coordenadas las elimina, establece las nuevas coordenadas de la fruta
+        Establece las nuevas coordenadas de la fruta, garantizando que no se superponga con el snake ni con el obstáculo.
         """
-        if self.__coordinates:
-            self.__coordinates.pop()
-        self.__coordinates.append(self.__generate_fruit(board_dimensions, snake_coordinates, obstacle_coordinates))
+        self._coordinates = [self._generate_fruit(board_dimensions, snake_coordinates, obstacle_coordinates)]
 
     def set_quantity_fruits(self) -> None:
         """
-        Establece la nueva cantidad de frutas necesarias para ganar
+        Disminuye en uno la cantidad de frutas necesarias para ganar.
         """
-        self.__quantity_fruits -= 1
+        self._quantity_fruits -= 1
 
-    def __generate_fruit(self, board_dimensions: tuple, snake_coordinates: list, obstacle_coordinates: list) -> tuple:
+    def _generate_fruit(self, board_dimensions: tuple, snake_coordinates: list, obstacle_coordinates: list) -> tuple:
         """
-        Recibe: las dimensiones del tablero (tuple), las coordenadas del snake (list[tuple]) y las coordenadas del
-        obstáculo (tuple(tuple))
+        Genera nuevas coordenadas para la fruta dentro del rango del tablero, evitando que aparezca sobre el snake
+        o el obstáculo.
 
-        Crea las nuevas coordenadas de la fruta, que estén dentro del rango del tablero y que no aparezca
-        sobre el snake o el obstáculo
-
-        Devuelve: las nuevas coordenadas de la fruta (tuple)
+        Devuelve: las nuevas coordenadas de la fruta (tuple).
         """
         new_coordinates = None
-        while not new_coordinates or new_coordinates in snake_coordinates or new_coordinates in obstacle_coordinates:
+        while new_coordinates is None or new_coordinates in snake_coordinates or new_coordinates in obstacle_coordinates:
             new_coordinates = (randint(0, board_dimensions[1] - 1), randint(0, board_dimensions[0] - 1))
 
         return new_coordinates
