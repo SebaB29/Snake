@@ -1,11 +1,11 @@
-from graphics.graphics import WINDOW_HEIGHT, WINDOW_WIDTH, BUTTON_SIDES, PAUSE, show_game, show_end
 from graphics.gamelib import resize, title, loop, wait, get_events, EventType
-from src.constant import PAUSE, OBSTACLE_FILE
+from src.constant import WINDOW_HEIGHT, WINDOW_WIDTH, BUTTON_SIDES, PAUSE, OBSTACLE_FILE
 from src.game import Game
 from src.snake import Snake
 from src.fruit import Fruit
 from src.obstacle import Obstacle
 from src.obstacle_loader import ObstacleLoader
+from graphics.game_render import GameRenderer
 
 class Program:
 
@@ -14,11 +14,9 @@ class Program:
         self.game = Game()
         self.snake = Snake()
         self.fruit = Fruit()
-        self.loader = ObstacleLoader(OBSTACLE_FILE)
-        self.obstacle = Obstacle(self.loader)
-
-    def get_level(self):
-        return self.level
+        self.obstacle_loader = ObstacleLoader(OBSTACLE_FILE)
+        self.obstacle = Obstacle(self.obstacle_loader)
+        self.renderer = GameRenderer(level, self.snake, self.fruit, self.obstacle)  # Nueva instancia de GameRenderer
 
     def start_game(self):
         title("SNAKE")
@@ -43,7 +41,7 @@ class Program:
             self._handle_events()
             self._move_snake()
             self._check_fruit_collision()
-            self._update_game_display()
+            self.renderer.show_game()  # Usamos el renderizado aquí
 
     def _handle_events(self):
         """
@@ -72,17 +70,6 @@ class Program:
             self.fruit.set_quantity_fruits()
             self.fruit.set_fruit(self.game.get_board_dimensions(), self.snake.coordinates, self.obstacle.coordinates)
 
-    def _update_game_display(self):
-        """
-        Muestra la actualización de la interfaz del juego.
-        """
-        show_game(
-            self.level,
-            [self.snake.coordinates, self.snake.colour],
-            [self.fruit.coordinates, self.fruit.colour, self.fruit.quantity_fruits],
-            [self.obstacle.coordinates, self.obstacle.colour]
-        )
-
     def won(self):
         return self.game._you_won(self.fruit.quantity_fruits)
 
@@ -91,4 +78,4 @@ class Program:
         return event and BUTTON_SIDES["left"] <= event.x <= BUTTON_SIDES["right"] and BUTTON_SIDES["up"] <= event.y <= BUTTON_SIDES["down"]
 
     def end_game(self):
-        show_end()
+        self.renderer.show_end()  # Usamos el renderizado para mostrar el fin del juego
