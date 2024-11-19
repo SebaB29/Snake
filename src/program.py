@@ -22,9 +22,9 @@ class Program:
         title("SNAKE")
         resize(WINDOW_WIDTH, WINDOW_HEIGHT)
         self.obstacle.set_obstacle(self.level)
-        self.fruit.set_fruit(self.game.get_board_dimensions(), self.snake.coordinates, self.obstacle.get_coordinates())
+        self.fruit.set_fruit(self.game.get_board_dimensions(), self.snake.coordinates, self.obstacle.coordinates)
 
-        while loop(fps = 8) and not self.game._finish_game(self.snake, self.fruit.quantity_fruits, self.obstacle.get_coordinates()):
+        while loop(fps = 8) and not self.game._finish_game(self.snake, self.fruit.quantity_fruits, self.obstacle.coordinates):
             for event in get_events():
                 if event.type == EventType.KeyPress:
                     event.key = event.key.upper()
@@ -36,13 +36,13 @@ class Program:
             if self.snake.head in self.fruit.coordinates:
                 self.snake.eat_fruit()
                 self.fruit.set_quantity_fruits()
-                self.fruit.set_fruit(self.game.get_board_dimensions(), self.snake.coordinates, self.obstacle.get_coordinates())
+                self.fruit.set_fruit(self.game.get_board_dimensions(), self.snake.coordinates, self.obstacle.coordinates)
 
             show_game(
                     self.level,
                     [self.snake.coordinates, self.snake.colour],
                     [self.fruit.coordinates, self.fruit.colour, self.fruit.quantity_fruits],
-                    [self.obstacle.get_coordinates(), self.obstacle.get_colour()]
+                    [self.obstacle.coordinates, self.obstacle.colour]
                     )
 
     def won(self):

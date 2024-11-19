@@ -5,44 +5,57 @@ class Obstacle:
 
     def __init__(self) -> None:
         """
-        Inicializa la clase Obstacle
+        Inicializa la clase Obstacle, establece las coordenadas de los obstáculos y su color.
         """
-        self.__coordinates = None
-        self.__colour = "#CEB200"
-        self.__obstacles = self.__read_obstacle_file()
+        self._coordinates = []
+        self._colour = "#CEB200"
+        self._obstacles = self._read_obstacle_file()
 
-    def get_coordinates(self) -> list:
+    @property
+    def coordinates(self) -> list:
         """
-        Devuelve: las coordenadas del obstáculo (list)
+        Devuelve las coordenadas del obstáculo.
         """
-        return self.__coordinates
-    
-    def get_colour(self) -> str:
+        return self._coordinates
+
+    @property
+    def colour(self) -> str:
         """
-        Devuelve: el color del obstáculo (str)
+        Devuelve el color del obstáculo.
         """
-        return self.__colour
+        return self._colour
 
     def set_obstacle(self, level: int) -> None:
         """
-        Recibe: el nivel (int)
+        Establece las coordenadas del obstáculo basado en el nivel proporcionado.
 
-        Establece las coordenadas del obstáculo que corresponde
+        Recibe: 
+        - `level`: El nivel para el cual se asignan las coordenadas del obstáculo.
         """
-        obstacle_index = (level - 1) % len(self.__obstacles)
-        self.__coordinates = self.__obstacles[obstacle_index]
+        if not self._obstacles:
+            print("Error: No hay obstáculos disponibles. Verifica el archivo de obstáculos.")
+            return
 
-    def __read_obstacle_file(self) -> dict:
+        obstacle_index = (level - 1) % len(self._obstacles)
+        self._coordinates = self._obstacles[obstacle_index]
+
+    def _read_obstacle_file(self) -> dict:
         """
-        Lee el archivo con las coordenadas de los obstáculos
+        Lee el archivo con las coordenadas de los obstáculos. Cada línea del archivo representa un grupo de obstáculos.
 
-        Devuelve: un diccionario (dict) con las coordenadas de todos los obstáculos
+        Devuelve: 
+        - Un diccionario con las coordenadas de todos los obstáculos (dict).
         """
         obstacles = {}
-        with open(OBSTACLE_FILE) as file:
-            csv_reader = reader(file, delimiter=" ")
-            for i, coordinate_group in enumerate(csv_reader):
-                for coordinates in coordinate_group[:-2]:
-                    obstacles[i] = list(map(eval, coordinates.split(";")))
-
+        try:
+            with open(OBSTACLE_FILE) as file:
+                csv_reader = reader(file, delimiter=" ")
+                for i, coordinate_group in enumerate(csv_reader):
+                    obstacles[i] = [
+                        tuple(map(int, coords.split(','))) for coords in coordinate_group[0].split(';')
+                    ]
+        except FileNotFoundError:
+            print(f"Error: El archivo {OBSTACLE_FILE} no fue encontrado.")
+        except Exception as e:
+            print(f"Error al leer el archivo de obstáculos: {e}")
         return obstacles
