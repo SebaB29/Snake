@@ -13,6 +13,7 @@ def main(level=1):
             level += 1
         else:
             game.end_game()
+            level = 1
             if not game.restart_game():
                 break
 
