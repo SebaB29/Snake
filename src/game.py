@@ -1,66 +1,109 @@
 from src.constant import BOARD_ROWS, BOARD_COLUMNS, KEYS
+from src.snake import Snake
+
 
 class Game:
 
     def __init__(self) -> None:
         """
-        Inicializa la clase Game
-        """
-        self.__last_move = "RIGHT"
+        Inicializa la clase Game con el movimiento inicial de la serpiente.
 
-    def get_board_dimensions(self) -> tuple:
+        El movimiento predeterminado es 'RIGHT'. Esta clase gestiona las acciones relacionadas
+        con el tablero de juego, los movimientos de la serpiente y las condiciones de victoria o derrota.
         """
-        Devuelve: las dimensiones del tablero (tuple)
+        self._last_move = "RIGHT"
+
+    def get_board_dimensions(self) -> tuple[int]:
+        """
+        Devuelve las dimensiones del tablero de juego como una tupla.
+
+        El tablero se define por la cantidad de filas y columnas especificadas
+        en las constantes BOARD_ROWS y BOARD_COLUMNS.
+
+        Returns:
+            tuple: Una tupla con dos enteros, el número de filas y columnas del tablero.
         """
         return (BOARD_ROWS, BOARD_COLUMNS)
 
     def get_last_move(self) -> str:
         """
-        Devuelve: la última jugada realizada (str)
+        Obtiene la última dirección de movimiento realizada por la serpiente.
+
+        Returns:
+            str: La última dirección de movimiento de la serpiente, que puede ser 'UP', 'DOWN', 'LEFT' o 'RIGHT'.
         """
-        return self.__last_move
+        return self._last_move
 
     def set_move(self, key: str) -> None:
         """
-        Recibe: una tecla (str)
+        Establece la nueva dirección de movimiento de la serpiente.
 
-        Establece el movimiento si la tecla esta en KEYS
+        Si la tecla proporcionada está dentro de las teclas permitidas en KEYS,
+        el movimiento de la serpiente se actualizará.
+
+        Args:
+            key (str): La tecla presionada por el jugador, que debe estar en el conjunto de teclas válidas (KEYS).
+
+        Returns:
+            None
         """
         if key in KEYS:
-            self.__last_move = key
+            self._last_move = key
 
-    def __you_lost(self, snake_head: tuple, you_crashed: bool) -> bool:
+    def _you_lost(self, snake_head: tuple[int], you_crashed: bool) -> bool:
         """
-        Recibe: las coordenadas de la cabeza del snake (tuple) y una variable que determina si el snake choco (bool)
+        Verifica si el jugador ha perdido el juego, ya sea por chocar contra los límites del tablero o contra un obstáculo.
 
-        Devuelve: 
-            True: si perdio, es decir, si el snake choco o esta fuera de rango
+        Args:
+            snake_head (tuple): Las coordenadas de la cabeza de la serpiente, representadas como una tupla (x, y).
+            you_crashed (bool): Un valor booleano que indica si la serpiente ha chocado contra un obstáculo.
 
-            False: en caso contrario
+        Returns:
+            bool:
+                - True si el jugador ha perdido (ya sea porque la cabeza de la serpiente está fuera de los límites
+                  del tablero o porque la serpiente chocó contra un obstáculo).
+                - False si el jugador no ha perdido.
         """
-        return not (0 <= snake_head[0] < BOARD_ROWS and 0 <= snake_head[1] < BOARD_COLUMNS) or you_crashed
+        return (
+            not (0 <= snake_head[0] < BOARD_ROWS and 0 <= snake_head[1] < BOARD_COLUMNS)
+            or you_crashed
+        )
 
     def _you_won(self, quantity_fruits: int) -> bool:
         """
-        Recibe: la cantidad de frutas que hay que comer para ganar (int)
-        
-        Devuelve:
-                True: si ganó, es decir, si la cantidad de frutas es cero
-                
-                False: en caso contrario
+        Verifica si el jugador ha ganado el juego, es decir, ha comido todas las frutas necesarias.
+
+        Args:
+            quantity_fruits (int): La cantidad de frutas que el jugador necesita comer para ganar el juego.
+
+        Returns:
+            bool:
+                - True si el jugador ha ganado (es decir, si la cantidad de frutas es 0).
+                - False si el jugador no ha ganado aún.
         """
         return not quantity_fruits
 
-    def _finish_game(self, snake: object, quantity_fruits: int, obstacle_coordinates: list) -> bool:
+    def finish_game(
+        self,
+        snake: Snake,
+        quantity_fruits: int,
+        obstacle_coordinates: list[tuple[int, int]],
+    ) -> bool:
         """
-        Recibe: el snake (object), la cantidad de frutas que hay que comer para ganar (int) 
-                y las coordenadas del obstaculo (tuple(tuple))
-        
-        Ejecuta los métodos _you_won y you_lost
-        
-        Devuelve:
-                True: en caso de que se haya ganado o perdido
-                
-                False: en caso contrario
+        Evalúa si el juego ha terminado, ya sea por victoria o derrota.
+
+        Este método invoca las funciones _you_won y _you_lost para determinar el estado final del juego.
+
+        Args:
+            snake (object): El objeto de la serpiente, que contiene las coordenadas de la cabeza y la lógica de colisión.
+            quantity_fruits (int): La cantidad de frutas que faltan por comer para ganar el juego.
+            obstacle_coordinates (list): Una lista de tuplas que representan las coordenadas de los obstáculos en el tablero.
+
+        Returns:
+            bool:
+                - True si el jugador ha ganado o perdido (si se cumplen las condiciones de victoria o derrota).
+                - False si el juego continúa.
         """
-        return self._you_won(quantity_fruits) or self.__you_lost(snake.head, snake._you_crashed(obstacle_coordinates))
+        return self._you_won(quantity_fruits) or self._you_lost(
+            snake.head, snake.you_crashed(obstacle_coordinates)
+        )

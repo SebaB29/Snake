@@ -1,61 +1,97 @@
 from src.constant import KEYS
 
+
 class Snake:
+    """
+    Representa una serpiente en el juego Snake.
+
+    La serpiente está compuesta por una lista de coordenadas que representan
+    las posiciones de su cuerpo en el tablero.
+    """
+
     def __init__(self) -> None:
         """
-        Inicializa la clase Snake con una lista de coordenadas que representa su cuerpo.
+        Inicializa la serpiente con un cuerpo compuesto por tres segmentos
+        horizontales consecutivos y un color predeterminado.
+
+        Atributos:
+            _coordinates (list): Lista de tuplas que representan las coordenadas
+                de los segmentos del cuerpo de la serpiente en el tablero.
+            _colour (str): Código de color hexadecimal que representa el color
+                de la serpiente.
         """
-        self.__coordinates = [(0, 0), (1, 0), (2, 0)]  # Coordenadas del cuerpo
-        self.__colour = "#1A8500"  # Color de la serpiente
+        self._coordinates = [(0, 0), (1, 0), (2, 0)]
+        self._colour = "#1A8500"
 
     @property
     def coordinates(self) -> list:
         """
-        Devuelve las coordenadas completas de la serpiente.
+        Obtiene todas las coordenadas del cuerpo de la serpiente.
+
+        :return: Lista de tuplas representando las posiciones del cuerpo.
         """
-        return self.__coordinates
+        return self._coordinates
 
     @property
     def head(self) -> tuple:
         """
-        Devuelve las coordenadas de la cabeza de la serpiente.
+        Obtiene las coordenadas actuales de la cabeza de la serpiente.
+
+        :return: Una tupla representando la posición de la cabeza.
         """
-        return self.__coordinates[-1]
+        return self._coordinates[-1]
 
     @property
     def tail(self) -> tuple:
         """
-        Devuelve las coordenadas de la cola de la serpiente.
+        Obtiene las coordenadas actuales de la cola de la serpiente.
+
+        :return: Una tupla representando la posición de la cola.
         """
-        return self.__coordinates[0]
+        return self._coordinates[0]
 
     @property
     def colour(self) -> str:
         """
-        Devuelve el color de la serpiente.
+        Obtiene el color de la serpiente.
+
+        :return: Un string con el código hexadecimal del color.
         """
-        return self.__colour
+        return self._colour
 
     def move(self, last_move: str) -> None:
         """
-        Recibe el último movimiento realizado y mueve la serpiente en consecuencia.
-        Actualiza la posición de la cabeza y la cola.
+        Mueve la serpiente en la dirección indicada por el último movimiento.
+
+        La cabeza se mueve a una nueva posición calculada a partir de
+        la dirección, y la cola se elimina para mantener la longitud constante.
+
+        :param last_move: Un string que representa la dirección del movimiento
+            ('UP', 'DOWN', 'LEFT', 'RIGHT').
         """
-        # Calcula la nueva cabeza con base en el movimiento
-        new_head = (self.head[0] + KEYS[last_move][0], self.head[1] + KEYS[last_move][1])
-        # El movimiento es siempre agregar una nueva cabeza y mover el cuerpo
-        self.__coordinates.append(new_head)
-        self.__coordinates.pop(0)  # La cola se elimina al final
+        new_head = (
+            self.head[0] + KEYS[last_move][0],
+            self.head[1] + KEYS[last_move][1],
+        )
+        self._coordinates.append(new_head)
+        self._coordinates.pop(0)
 
     def eat_fruit(self) -> None:
         """
-        Al comer una fruta, la serpiente crece añadiendo la cola al principio de las coordenadas.
-        """
-        self.__coordinates.insert(0, self.tail)
+        Hace que la serpiente crezca al comer una fruta.
 
-    def _you_crashed(self, obstacle_coordinates: tuple) -> bool:
+        La longitud de la serpiente aumenta añadiendo una nueva sección en
+        la posición de la cola actual.
         """
-        Verifica si la serpiente ha chocado con su propio cuerpo o con un obstáculo.
+        self._coordinates.insert(0, self.tail)
+
+    def you_crashed(self, obstacle_coordinates: list[tuple[int, int]]) -> bool:
         """
-        # Choca si la cabeza está en el cuerpo o en las coordenadas de los obstáculos
-        return self.head in self.__coordinates[:-1] or self.head in obstacle_coordinates
+        Determina si la serpiente ha chocado con su propio cuerpo o con un obstáculo.
+
+        :param obstacle_coordinates: Una tupla o lista de coordenadas que
+            representan las posiciones de los obstáculos en el tablero.
+        :return: True si la cabeza de la serpiente colisiona con su cuerpo o
+            con un obstáculo; False en caso contrario.
+        """
+        return self.head in self._coordinates[:-1] or self.head in obstacle_coordinates

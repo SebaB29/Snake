@@ -1,6 +1,7 @@
 from src.program import Program
 from graphics.gamelib import init
 
+
 def main(level=1):
     """
     Inicia el ciclo del juego para un nivel específico, maneja la transición entre niveles y reinicios del juego.
@@ -8,7 +9,7 @@ def main(level=1):
     while True:
         game = Program(level)
         game.start_game()
-        
+
         if game.won():
             level += 1
         else:
@@ -18,6 +19,7 @@ def main(level=1):
                 break
 
     print("Juego finalizado.")
+
 
 if __name__ == "__main__":
     init(main)
