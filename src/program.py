@@ -5,6 +5,7 @@ from src.snake import Snake
 from src.fruit import Fruit
 from src.obstacle import Obstacle
 from src.obstacle_loader import ObstacleLoader
+from src.event_controller import EventController
 from graphics.game_render import GameRenderer
 
 class Program:
@@ -16,7 +17,8 @@ class Program:
         self.fruit = Fruit()
         self.obstacle_loader = ObstacleLoader(OBSTACLE_FILE)
         self.obstacle = Obstacle(self.obstacle_loader)
-        self.renderer = GameRenderer(level, self.snake, self.fruit, self.obstacle)  # Nueva instancia de GameRenderer
+        self.event_controller = EventController(BUTTON_SIDES)
+        self.renderer = GameRenderer(level, self.snake, self.fruit, self.obstacle)
 
     def start_game(self):
         title("SNAKE")
@@ -37,7 +39,7 @@ class Program:
         """
         Ejecuta el bucle principal del juego. Se repite hasta que el juego termine.
         """
-        while loop(fps=8) and not self.game._finish_game(self.snake, self.fruit.quantity_fruits, self.obstacle.coordinates):
+        while loop(fps=8) and not self.game.finish_game(self.snake, self.fruit.quantity_fruits, self.obstacle.coordinates):
             self._handle_events()
             self._move_snake()
             self._check_fruit_collision()
@@ -74,8 +76,11 @@ class Program:
         return self.game._you_won(self.fruit.quantity_fruits)
 
     def restart_game(self):
+        """
+        Maneja la lógica de reinicio del juego usando el controlador de eventos.
+        """
         event = wait(EventType.ButtonPress)
-        return event and BUTTON_SIDES["left"] <= event.x <= BUTTON_SIDES["right"] and BUTTON_SIDES["up"] <= event.y <= BUTTON_SIDES["down"]
+        return self.event_controller.is_restart_button_pressed(event)
 
     def end_game(self):
         self.renderer.show_end()  # Usamos el renderizado para mostrar el fin del juego
