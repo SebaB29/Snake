@@ -67,21 +67,24 @@ The project structure is as follows:
 ```
 Snake/
 ├── graphics/
-│   ├── gamelib.py
-│   └── graphics.py
+│   ├── game_render.py
+│   └── gamelib.py
 ├── img/
 │   └── [2 demo images of the game]
 ├── resources/
 │   └── obstacles.txt
 ├── src/
 │   ├── constant.py
+│   ├── event_controller.py
 │   ├── fruit.py
-│   ├── obstacle.py
 │   ├── game.py
-│   ├── snake.py
-│   └── program.py
-├── main.py
+│   ├── obstacle_loader.py
+│   ├── obstacle.py
+│   ├── program.py
+│   └── snake.py
+├── .gitignore
 ├── LICENSE
+├── main.py
 └── README.md
 ```
 
