@@ -1,5 +1,5 @@
 from graphics.gamelib import resize, title, loop, wait, get_events, EventType
-from src.constant import WINDOW_HEIGHT, WINDOW_WIDTH, BUTTON_SIDES, PAUSE, OBSTACLE_FILE
+from src.constant import WINDOW_HEIGHT, WINDOW_WIDTH, OBSTACLE_FILE
 from src.game import Game
 from src.snake import Snake
 from src.fruit import Fruit
@@ -17,7 +17,7 @@ class Program:
         self.fruit = Fruit()
         self.obstacle_loader = ObstacleLoader(OBSTACLE_FILE)
         self.obstacle = Obstacle(self.obstacle_loader)
-        self.event_controller = EventController(BUTTON_SIDES)
+        self.event_controller = EventController()
         self.renderer = GameRenderer(level, self.snake, self.fruit, self.obstacle)
 
     def start_game(self):
@@ -49,13 +49,8 @@ class Program:
         """
         Maneja los eventos de entrada, como presionar teclas o interactuar con la interfaz.
         """
-        for event in get_events():
-            if event.type == EventType.KeyPress:
-                event.key = event.key.upper()
-                self.game.set_move(event.key)
-
-                if event.key == PAUSE:
-                    wait(EventType.KeyPress)
+        events = get_events()
+        self.event_controller.handle_key_events(events, self.game)
 
     def _move_snake(self):
         """
@@ -83,4 +78,4 @@ class Program:
         return self.event_controller.is_restart_button_pressed(event)
 
     def end_game(self):
-        self.renderer.show_end()  # Usamos el renderizado para mostrar el fin del juego
+        self.renderer.show_end()
