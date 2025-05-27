@@ -5,7 +5,7 @@ Thanks for your interest in contributing! Here are some guidelines to help you g
 ## Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/your-username/Snake.git`
+2. Clone your fork: `git clone https://github.com/SebaB29/Snake.git`
 3. Create a new branch: `git checkout -b feature/YourFeatureName`
 4. Make your changes
 5. Commit with a clear message: `git commit -m 'Add YourFeatureName'`
