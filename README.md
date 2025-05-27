@@ -11,8 +11,11 @@ Welcome to **Snake**, a classic arcade game where you guide a growing snake to e
 - [File Structure](#file-structure)
 - [Technologies](#technologies)
 - [Contributing](#contributing)
-- [License](#license)
 - [About This Project](#about)
+- [License](#license)
+- [Security](#security)
+- [Code of Conduct](#code-of-conduct)
+
 
 ## 🕹️ Features <a name="features"></a>
 
@@ -66,6 +69,14 @@ The project structure is as follows:
 
 ```
 Snake/
+├── .github/
+│   ├── CODE_OF_CONDUCT.md
+│   ├── CONTRIBUTING.md
+│   ├── SECURITY.md
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── graphics/
 │   ├── game_render.py
 │   └── gamelib.py
@@ -111,10 +122,18 @@ Contributions are welcome! If you'd like to improve the game, feel free to fork 
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a pull request
 
+## 📚 About This Project <a name="about"></a>
+
+This project was developed as a practical assignment for university. It aims to implement the classic Snake game using Python, focusing on game logic and graphical interface through object-oriented programming principles.
+
 ## 📄 License <a name="license"></a>
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-## 📚 About This Project <a name="about"></a>
+## 🔐 Security <a name="security"></a>
 
-This project was developed as a practical assignment for university. It aims to implement the classic Snake game using Python, focusing on game logic and graphical interface through object-oriented programming principles.
+If you discover a vulnerability, please review our [Security Policy](.github/SECURITY.md) for guidance on reporting.
+
+## 📜 Code of Conduct <a name="code-of-conduct"></a>
+
+Please read our [Code of Conduct](.github/CODE_OF_CONDUCT.md) to understand expected behavior.
