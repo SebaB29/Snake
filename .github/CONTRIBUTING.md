@@ -1,28 +1,21 @@
-# Contributing to Snake Game 🐍
+# Contribuir al proyecto Snake Game 🐍
 
-Thanks for your interest in contributing! Here are some guidelines to help you get started:
+¡Gracias por tu interés en contribuir! Este proyecto fue desarrollado como trabajo práctico universitario, pero cualquier mejora, corrección o idea es bienvenida.
 
-## Getting Started
+## Cómo contribuir
 
-1. Fork the repository
-2. Clone your fork: `git clone https://github.com/SebaB29/Snake.git`
-3. Create a new branch: `git checkout -b feature/YourFeatureName`
-4. Make your changes
-5. Commit with a clear message: `git commit -m 'Add YourFeatureName'`
-6. Push to your fork: `git push origin feature/YourFeatureName`
-7. Open a pull request
+1. **Fork** el repositorio
+2. Crea tu rama: `git checkout -b feature/nueva-funcionalidad`
+3. Realizá tus cambios y confirmalos: `git commit -m "Agrega nueva funcionalidad"`
+4. Empujá tu rama: `git push origin feature/nueva-funcionalidad`
+5. Abrí un Pull Request
 
-## Code Guidelines
+## Ideas para contribuir
 
-- Use clear, readable Python code
-- Follow object-oriented principles
-- Add comments to explain complex logic
-- Keep functions and methods short and focused
+- Nuevos modos de juego
+- Mejoras gráficas o animaciones
+- Mejor balance de dificultad
+- Refactor de código a patrones más limpios
 
-## Submitting Changes
+Gracias por tu colaboración 🎉
 
-- Test your changes locally
-- Make sure the game still runs with `python main.py`
-- Include screenshots or gifs if your change affects visuals
-
-Happy coding! 🎉
