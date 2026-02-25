@@ -1,21 +1,27 @@
-# Contribuir al proyecto Snake Game 🐍
+# Contributing to Snake Game
 
-¡Gracias por tu interés en contribuir! Este proyecto fue desarrollado como trabajo práctico universitario, pero cualquier mejora, corrección o idea es bienvenida.
+Thank you for your interest in contributing! This project was developed as a university assignment, but any improvements, bug fixes, or new ideas are more than welcome to make this classic game even better.
 
-## Cómo contribuir
+## How to Contribute
 
-1. **Fork** el repositorio
-2. Crea tu rama: `git checkout -b feature/nueva-funcionalidad`
-3. Realizá tus cambios y confirmalos: `git commit -m "Agrega nueva funcionalidad"`
-4. Empujá tu rama: `git push origin feature/nueva-funcionalidad`
-5. Abrí un Pull Request
+1. **Fork** the repository.
+2. Create your branch: `git checkout -b feature/new-functionality`.
+3. Make your changes and commit them: `git commit -m "Add new functionality"`.
+4. Push your branch: `git push origin feature/new-functionality`.
+5. Open a **Pull Request**.
 
-## Ideas para contribuir
+## Ideas for Contribution
 
-- Nuevos modos de juego
-- Mejoras gráficas o animaciones
-- Mejor balance de dificultad
-- Refactor de código a patrones más limpios
+- **New Game Modes:** Implement specialized levels, time trials, or "ghost" modes.
+- **Visual Improvements:** Add animations for the snake's movement, better fruit textures, or custom background themes.
+- **Difficulty Balancing:** Refine the speed increments and obstacle placement for a smoother learning curve.
+- **Code Refactoring:** Improve the Object-Oriented structure or apply design patterns to make the code cleaner and more maintainable.
+- **Enhanced Physics:** Improve collision detection or add "power-ups" that change the snake's behavior.
 
-Gracias por tu colaboración 🎉
+## Development Tips
 
+- **OOP Principles:** Since this is an educational project, try to keep your logic encapsulated within the relevant classes (`Snake`, `Fruit`, `Obstacle`).
+- **Gamelib:** Familiarize yourself with how the `gamelib` handles the main loop and events before making deep changes to the rendering logic.
+- **Clean Code:** Use descriptive variable names and keep the `src/` directory organized.
+
+Thank you for your collaboration! 🎉
