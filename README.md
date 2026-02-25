@@ -18,7 +18,6 @@ Welcome to **Snake**, a classic arcade game implementation in Python. Navigate t
   - [⚙️ Installation](#️-installation)
 - [💡 Usage](#-usage)
 - [🤝 Contributing](#-contributing)
-- [👥 Team](#-team)
 - [📄 License](#-license)
 
 # 📝 Description
