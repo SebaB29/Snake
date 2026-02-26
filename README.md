@@ -53,7 +53,7 @@ Snake/
 ## ⚙️ Installation
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/SebaB29/Snake.git](https://github.com/SebaB29/Snake.git)
+   git clone git@github.com:SebaB29/Snake.git
    cd Snake
    ```
 2. (Optional) Create a virtual environment:
